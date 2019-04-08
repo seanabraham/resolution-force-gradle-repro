@@ -24,6 +24,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+configurations.all {
+  resolutionStrategy {
+    force 'com.google.guava:guava:27.0-jre'
+  }
+}
+
 dependencyLocking {
     lockAllConfigurations()
 }
