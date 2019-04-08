@@ -46,7 +46,13 @@ com.google.guava:guava:27.0-jre
    ]
    Selection reasons:
       - Forced
-      - By constraint : dependency was locked to version '27.0.1-jre'
+      - By constraint : dependency was locked to version '27.0-jre'
+
+com.google.guava:guava:{strictly 27.0-jre} -> 27.0-jre
+\--- compileClasspath
+
+com.google.guava:guava:{strictly 27.0.1-jre} -> 27.0-jre
+\--- compileClasspath
 ```
 
 In addition, running `./gradlew jar` **succeeds** where I would expect it to **fail** as the dependency resolution differs from the lock state.
@@ -55,9 +61,6 @@ In addition, running `./gradlew jar` **succeeds** where I would expect it to **f
 Intersetingly, running `./gradlew jar --write-locks` produces the following diff:
 ```diff
 diff --git a/gradle/dependency-locks/compileClasspath.lockfile b/gradle/dependency-locks/compileClasspath.lockfile
-index 7c3a402..8dc83b2 100644
---- a/gradle/dependency-locks/compileClasspath.lockfile
-+++ b/gradle/dependency-locks/compileClasspath.lockfile
 @@ -3,8 +3,8 @@
  # This file is expected to be part of source control.
  com.google.code.findbugs:jsr305:3.0.2
